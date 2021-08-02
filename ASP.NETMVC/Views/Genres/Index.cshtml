@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ASP.NETMVC.Models.GENRES>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    <a href="~/Genres/Create" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Ajouter Genre</a>
+</p>
+
+<h3>Les genres de livres disponibles:</h3>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <tr>
+            <th>Libelle</th>
+            <th>Modifier</th>
+            <th>Details</th>
+            <th> Supprimer</th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LIBELLE_GENRE)
+                </td>
+                <td><a href="~/Genres/Edit/@item.ID_GENRE" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
+                <td><a href="~/Genres/Details/@item.ID_GENRE" class="btn  btn-info btn-xs"><span class="glyphicon glyphicon-trash"></span>Details</a></td>
+                <td> <a href="~/Genres/Delete/@item.ID_GENRE" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+            </tr>
+        }
+
+    </table>
+    </div>

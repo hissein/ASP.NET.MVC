@@ -1,0 +1,26 @@
+﻿@model ASP.NETMVC.Models.GENRES
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details du genre</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_GENRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_GENRE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div>
+        <a href="~/Genres/Edit/@Model.ID_GENRE" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a>
+        <a href="~/Genres/Index" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Retour a la ligne</a>
+    </div>
+</p>

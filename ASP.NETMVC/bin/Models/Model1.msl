@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BiblioModelStoreContainer" CdmEntityContainer="BiblioEntities">
+    <EntitySetMapping Name="AUTEURS">
+      <EntityTypeMapping TypeName="BiblioModel.AUTEURS">
+        <MappingFragment StoreEntitySet="AUTEURS">
+          <ScalarProperty Name="ID_AUTEUR" ColumnName="ID_AUTEUR" />
+          <ScalarProperty Name="NOM_AUTEUR" ColumnName="NOM_AUTEUR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COURANTS">
+      <EntityTypeMapping TypeName="BiblioModel.COURANTS">
+        <MappingFragment StoreEntitySet="COURANTS">
+          <ScalarProperty Name="ID_COURANT" ColumnName="ID_COURANT" />
+          <ScalarProperty Name="ID_GENRE" ColumnName="ID_GENRE" />
+          <ScalarProperty Name="LIBELLE_COURANT" ColumnName="LIBELLE_COURANT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GENRES">
+      <EntityTypeMapping TypeName="BiblioModel.GENRES">
+        <MappingFragment StoreEntitySet="GENRES">
+          <ScalarProperty Name="ID_GENRE" ColumnName="ID_GENRE" />
+          <ScalarProperty Name="LIBELLE_GENRE" ColumnName="LIBELLE_GENRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LIVRES">
+      <EntityTypeMapping TypeName="BiblioModel.LIVRES">
+        <MappingFragment StoreEntitySet="LIVRES">
+          <ScalarProperty Name="URL_LIVRE" ColumnName="URL_LIVRE" />
+          <ScalarProperty Name="LIVRE" ColumnName="LIVRE" />
+          <ScalarProperty Name="ID_LIVRE" ColumnName="ID_LIVRE" />
+          <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+          <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+          <ScalarProperty Name="EDITEUR" ColumnName="EDITEUR" />
+          <ScalarProperty Name="ANNEE_EDITION" ColumnName="ANNEE_EDITION" />
+          <ScalarProperty Name="ID_AUTEUR" ColumnName="ID_AUTEUR" />
+          <ScalarProperty Name="ID_GENRE" ColumnName="ID_GENRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BIBLIOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AUTEURS">
+    <Key>
+      <PropertyRef Name="ID_AUTEUR" />
+    </Key>
+    <Property Name="ID_AUTEUR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM_AUTEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LIVRES" Relationship="Self.FK_LIVRES_AUTEURS" FromRole="AUTEURS" ToRole="LIVRES" />
+  </EntityType>
+  <EntityType Name="COURANTS">
+    <Key>
+      <PropertyRef Name="ID_COURANT" />
+    </Key>
+    <Property Name="ID_COURANT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_GENRE" Type="Int32" />
+    <Property Name="LIBELLE_COURANT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GENRES" Relationship="Self.FK_COURANTS_GENRES" FromRole="COURANTS" ToRole="GENRES" />
+  </EntityType>
+  <EntityType Name="GENRES">
+    <Key>
+      <PropertyRef Name="ID_GENRE" />
+    </Key>
+    <Property Name="ID_GENRE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LIBELLE_GENRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="COURANTS" Relationship="Self.FK_COURANTS_GENRES" FromRole="GENRES" ToRole="COURANTS" />
+    <NavigationProperty Name="LIVRES" Relationship="Self.FK_LIVRES_GENRES" FromRole="GENRES" ToRole="LIVRES" />
+  </EntityType>
+  <EntityType Name="LIVRES">
+    <Key>
+      <PropertyRef Name="ID_LIVRE" />
+    </Key>
+    <Property Name="ID_LIVRE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ISBN" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="TITRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EDITEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ANNEE_EDITION" Type="DateTime" Precision="0" />
+    <Property Name="ID_AUTEUR" Type="Int32" />
+    <Property Name="ID_GENRE" Type="Int32" />
+    <NavigationProperty Name="AUTEURS" Relationship="Self.FK_LIVRES_AUTEURS" FromRole="LIVRES" ToRole="AUTEURS" />
+    <NavigationProperty Name="GENRES" Relationship="Self.FK_LIVRES_GENRES" FromRole="LIVRES" ToRole="GENRES" />
+  </EntityType>
+  <Association Name="FK_LIVRES_AUTEURS">
+    <End Role="AUTEURS" Type="Self.AUTEURS" Multiplicity="0..1" />
+    <End Role="LIVRES" Type="Self.LIVRES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTEURS">
+        <PropertyRef Name="ID_AUTEUR" />
+      </Principal>
+      <Dependent Role="LIVRES">
+        <PropertyRef Name="ID_AUTEUR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COURANTS_GENRES">
+    <End Role="GENRES" Type="Self.GENRES" Multiplicity="0..1" />
+    <End Role="COURANTS" Type="Self.COURANTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GENRES">
+        <PropertyRef Name="ID_GENRE" />
+      </Principal>
+      <Dependent Role="COURANTS">
+        <PropertyRef Name="ID_GENRE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LIVRES_GENRES">
+    <End Role="GENRES" Type="Self.GENRES" Multiplicity="0..1" />
+    <End Role="LIVRES" Type="Self.LIVRES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GENRES">
+        <PropertyRef Name="ID_GENRE" />
+      </Principal>
+      <Dependent Role="LIVRES">
+        <PropertyRef Name="ID_GENRE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BIBLIOEntitie" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AUTEURS" EntityType="Self.AUTEURS" />
+    <EntitySet Name="COURANTS" EntityType="Self.COURANTS" />
+    <EntitySet Name="GENRES" EntityType="Self.GENRES" />
+    <EntitySet Name="LIVRES" EntityType="Self.LIVRES" />
+    <AssociationSet Name="FK_LIVRES_AUTEURS" Association="Self.FK_LIVRES_AUTEURS">
+      <End Role="AUTEURS" EntitySet="AUTEURS" />
+      <End Role="LIVRES" EntitySet="LIVRES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COURANTS_GENRES" Association="Self.FK_COURANTS_GENRES">
+      <End Role="GENRES" EntitySet="GENRES" />
+      <End Role="COURANTS" EntitySet="COURANTS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LIVRES_GENRES" Association="Self.FK_LIVRES_GENRES">
+      <End Role="GENRES" EntitySet="GENRES" />
+      <End Role="LIVRES" EntitySet="LIVRES" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

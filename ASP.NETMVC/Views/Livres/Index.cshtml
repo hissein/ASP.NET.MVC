@@ -1,0 +1,98 @@
+﻿@model IEnumerable<ASP.NETMVC.Models.LIVRES>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-10 col-sm-8 col-6 mx-auto mt-4">
+        <div class="row">
+            <div class="container-fluid col-xs-12 col-sm-6">
+                <a href="~/Livres/Create" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Ajouter un livre </a>
+            </div>
+                <div class="col-xs-12 col-sm-6">
+                    @using (Html.BeginForm())
+                    {
+                        <h6>Rechercher un livre par:</h6>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <div><label> Genre:</label> @Html.DropDownList("genre", "TOUS")</div>
+                                <div>
+                                    <label> Auteur:</label> @Html.DropDownList("auteur", "TOUS")
+                                </div>
+                                <div>
+                                    <label>Annee:</label> @Html.TextBox("SearchString", "", new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <input type="submit" value="Chercher" class="btn btn-success" />
+                            </div>
+                        </div>
+                    }
+                        </div>
+            </div>
+        <h3>Les livres disponibles:</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ISBN)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TITRE)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EDITEUR)
+                        </th>
+                        <th>
+                            ANNEE D'EDITION
+                        </th>
+                        <th>
+                            AUTEUR
+                        </th>
+                        <th>
+                            GENRE
+                        </th>
+                        <th>Lecture</th>
+                        <th>Modifier</th>
+                        <th>Details</th>
+                        <th> Supprimer</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ISBN)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TITRE)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EDITEUR)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ANNEE_EDITION.Value.Year)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AUTEURS.NOM_AUTEUR)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GENRES.LIBELLE_GENRE)
+                            </td>
+                            <td>
+                                <a href="~/@item.URL_LIVRE/@item.LIVRE">lire</a>
+                            </td>
+                            <td><a href="~/Livres/Edit/@item.ID_LIVRE " class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
+                            <td><a href="~/Livres/Details/@item.ID_LIVRE " class="btn  btn-info btn-xs"><span class="glyphicon glyphicon-trash"></span>Details</a></td>
+                            <td> <a href="~/Livres/Delete/@item.ID_LIVRE " class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+
+
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+
+    </div>

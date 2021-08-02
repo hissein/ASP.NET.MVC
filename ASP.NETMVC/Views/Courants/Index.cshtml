@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ASP.NETMVC.Models.COURANTS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<p>
+    <a href="~/Courants/Create" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Ajouter courant littéraire </a>
+</p>
+<h3>Les courant littéraires que nous avons:</h3>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <tr>
+            <th>Libelle</th>
+            <th>Genre</th>
+            <th>Modifier</th>
+            <th>Details</th>
+            <th> Supprimer</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LIBELLE_COURANT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GENRES.LIBELLE_GENRE)
+                </td>
+                <td><a href="~/Courants/Edit/@item.ID_COURANT " class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
+                <td><a href="~/Courants/Details/@item.ID_COURANT " class="btn  btn-info btn-xs"><span class="glyphicon glyphicon-trash"></span>Details</a></td>
+                <td> <a href="~/Courants/Delete/@item.ID_COURANT " class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+
+            </tr>
+        }
+
+    </table>
+    </div>

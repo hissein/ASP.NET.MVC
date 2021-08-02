@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BIBLIOTHEQUEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTEURS">
+          <Key>
+            <PropertyRef Name="ID_AUTEUR" />
+          </Key>
+          <Property Name="ID_AUTEUR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_AUTEUR" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="COURANTS">
+          <Key>
+            <PropertyRef Name="ID_COURANT" />
+          </Key>
+          <Property Name="ID_COURANT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_GENRE" Type="int" />
+          <Property Name="LIBELLE_COURANT" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="GENRES">
+          <Key>
+            <PropertyRef Name="ID_GENRE" />
+          </Key>
+          <Property Name="ID_GENRE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LIBELLE_GENRE" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LIVRES">
+          <Key>
+            <PropertyRef Name="ID_LIVRE" />
+          </Key>
+          <Property Name="ID_LIVRE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ISBN" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TITRE" Type="nvarchar(max)" />
+          <Property Name="EDITEUR" Type="nvarchar(max)" />
+          <Property Name="ANNEE_EDITION" Type="date" />
+          <Property Name="ID_AUTEUR" Type="int" />
+          <Property Name="ID_GENRE" Type="int" />
+          <Property Name="LIVRE" Type="nvarchar(max)" />
+          <Property Name="URL_LIVRE" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_COURANTS_GENRES">
+          <End Role="GENRES" Type="Self.GENRES" Multiplicity="0..1" />
+          <End Role="COURANTS" Type="Self.COURANTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENRES">
+              <PropertyRef Name="ID_GENRE" />
+            </Principal>
+            <Dependent Role="COURANTS">
+              <PropertyRef Name="ID_GENRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIVRES_AUTEURS">
+          <End Role="AUTEURS" Type="Self.AUTEURS" Multiplicity="0..1" />
+          <End Role="LIVRES" Type="Self.LIVRES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTEURS">
+              <PropertyRef Name="ID_AUTEUR" />
+            </Principal>
+            <Dependent Role="LIVRES">
+              <PropertyRef Name="ID_AUTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIVRES_GENRES">
+          <End Role="GENRES" Type="Self.GENRES" Multiplicity="0..1" />
+          <End Role="LIVRES" Type="Self.LIVRES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENRES">
+              <PropertyRef Name="ID_GENRE" />
+            </Principal>
+            <Dependent Role="LIVRES">
+              <PropertyRef Name="ID_GENRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BIBLIOTHEQUEModelStoreContainer">
+          <EntitySet Name="AUTEURS" EntityType="Self.AUTEURS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COURANTS" EntityType="Self.COURANTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GENRES" EntityType="Self.GENRES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LIVRES" EntityType="Self.LIVRES" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_COURANTS_GENRES" Association="Self.FK_COURANTS_GENRES">
+            <End Role="GENRES" EntitySet="GENRES" />
+            <End Role="COURANTS" EntitySet="COURANTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIVRES_AUTEURS" Association="Self.FK_LIVRES_AUTEURS">
+            <End Role="AUTEURS" EntitySet="AUTEURS" />
+            <End Role="LIVRES" EntitySet="LIVRES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIVRES_GENRES" Association="Self.FK_LIVRES_GENRES">
+            <End Role="GENRES" EntitySet="GENRES" />
+            <End Role="LIVRES" EntitySet="LIVRES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BIBLIOTHEQUEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AUTEURS">
+          <Key>
+            <PropertyRef Name="ID_AUTEUR" />
+          </Key>
+          <Property Name="ID_AUTEUR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_AUTEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LIVRES" Relationship="Self.FK_LIVRES_AUTEURS" FromRole="AUTEURS" ToRole="LIVRES" />
+        </EntityType>
+        <EntityType Name="COURANTS">
+          <Key>
+            <PropertyRef Name="ID_COURANT" />
+          </Key>
+          <Property Name="ID_COURANT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_GENRE" Type="Int32" />
+          <Property Name="LIBELLE_COURANT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GENRES" Relationship="Self.FK_COURANTS_GENRES" FromRole="COURANTS" ToRole="GENRES" />
+        </EntityType>
+        <EntityType Name="GENRES">
+          <Key>
+            <PropertyRef Name="ID_GENRE" />
+          </Key>
+          <Property Name="ID_GENRE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LIBELLE_GENRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="COURANTS" Relationship="Self.FK_COURANTS_GENRES" FromRole="GENRES" ToRole="COURANTS" />
+          <NavigationProperty Name="LIVRES" Relationship="Self.FK_LIVRES_GENRES" FromRole="GENRES" ToRole="LIVRES" />
+        </EntityType>
+        <EntityType Name="LIVRES">
+          <Key>
+            <PropertyRef Name="ID_LIVRE" />
+          </Key>
+          <Property Name="ID_LIVRE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ISBN" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TITRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EDITEUR" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ANNEE_EDITION" Type="DateTime" Precision="0" />
+          <Property Name="ID_AUTEUR" Type="Int32" />
+          <Property Name="ID_GENRE" Type="Int32" />
+          <Property Name="LIVRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="URL_LIVRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AUTEURS" Relationship="Self.FK_LIVRES_AUTEURS" FromRole="LIVRES" ToRole="AUTEURS" />
+          <NavigationProperty Name="GENRES" Relationship="Self.FK_LIVRES_GENRES" FromRole="LIVRES" ToRole="GENRES" />
+        </EntityType>
+        <Association Name="FK_LIVRES_AUTEURS">
+          <End Role="AUTEURS" Type="Self.AUTEURS" Multiplicity="0..1" />
+          <End Role="LIVRES" Type="Self.LIVRES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTEURS">
+              <PropertyRef Name="ID_AUTEUR" />
+            </Principal>
+            <Dependent Role="LIVRES">
+              <PropertyRef Name="ID_AUTEUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COURANTS_GENRES">
+          <End Role="GENRES" Type="Self.GENRES" Multiplicity="0..1" />
+          <End Role="COURANTS" Type="Self.COURANTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENRES">
+              <PropertyRef Name="ID_GENRE" />
+            </Principal>
+            <Dependent Role="COURANTS">
+              <PropertyRef Name="ID_GENRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LIVRES_GENRES">
+          <End Role="GENRES" Type="Self.GENRES" Multiplicity="0..1" />
+          <End Role="LIVRES" Type="Self.LIVRES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENRES">
+              <PropertyRef Name="ID_GENRE" />
+            </Principal>
+            <Dependent Role="LIVRES">
+              <PropertyRef Name="ID_GENRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BIBLIOTHEQUEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AUTEURS" EntityType="Self.AUTEURS" />
+          <EntitySet Name="COURANTS" EntityType="Self.COURANTS" />
+          <EntitySet Name="GENRES" EntityType="Self.GENRES" />
+          <EntitySet Name="LIVRES" EntityType="Self.LIVRES" />
+          <AssociationSet Name="FK_LIVRES_AUTEURS" Association="Self.FK_LIVRES_AUTEURS">
+            <End Role="AUTEURS" EntitySet="AUTEURS" />
+            <End Role="LIVRES" EntitySet="LIVRES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COURANTS_GENRES" Association="Self.FK_COURANTS_GENRES">
+            <End Role="GENRES" EntitySet="GENRES" />
+            <End Role="COURANTS" EntitySet="COURANTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LIVRES_GENRES" Association="Self.FK_LIVRES_GENRES">
+            <End Role="GENRES" EntitySet="GENRES" />
+            <End Role="LIVRES" EntitySet="LIVRES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BIBLIOTHEQUEModelStoreContainer" CdmEntityContainer="BIBLIOTHEQUEEntities">
+          <EntitySetMapping Name="AUTEURS">
+            <EntityTypeMapping TypeName="BIBLIOTHEQUEModel.AUTEURS">
+              <MappingFragment StoreEntitySet="AUTEURS">
+                <ScalarProperty Name="ID_AUTEUR" ColumnName="ID_AUTEUR" />
+                <ScalarProperty Name="NOM_AUTEUR" ColumnName="NOM_AUTEUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COURANTS">
+            <EntityTypeMapping TypeName="BIBLIOTHEQUEModel.COURANTS">
+              <MappingFragment StoreEntitySet="COURANTS">
+                <ScalarProperty Name="ID_COURANT" ColumnName="ID_COURANT" />
+                <ScalarProperty Name="ID_GENRE" ColumnName="ID_GENRE" />
+                <ScalarProperty Name="LIBELLE_COURANT" ColumnName="LIBELLE_COURANT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENRES">
+            <EntityTypeMapping TypeName="BIBLIOTHEQUEModel.GENRES">
+              <MappingFragment StoreEntitySet="GENRES">
+                <ScalarProperty Name="ID_GENRE" ColumnName="ID_GENRE" />
+                <ScalarProperty Name="LIBELLE_GENRE" ColumnName="LIBELLE_GENRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LIVRES">
+            <EntityTypeMapping TypeName="BIBLIOTHEQUEModel.LIVRES">
+              <MappingFragment StoreEntitySet="LIVRES">
+                <ScalarProperty Name="ID_LIVRE" ColumnName="ID_LIVRE" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="EDITEUR" ColumnName="EDITEUR" />
+                <ScalarProperty Name="ANNEE_EDITION" ColumnName="ANNEE_EDITION" />
+                <ScalarProperty Name="ID_AUTEUR" ColumnName="ID_AUTEUR" />
+                <ScalarProperty Name="ID_GENRE" ColumnName="ID_GENRE" />
+                <ScalarProperty Name="LIVRE" ColumnName="LIVRE" />
+                <ScalarProperty Name="URL_LIVRE" ColumnName="URL_LIVRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

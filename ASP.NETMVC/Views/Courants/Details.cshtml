@@ -1,0 +1,35 @@
+﻿@model ASP.NETMVC.Models.COURANTS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details d'un courant du livre</h2>
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LIBELLE_COURANT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LIBELLE_COURANT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GENRES.LIBELLE_GENRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GENRES.LIBELLE_GENRE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div>
+        <a href="~/Courants/Edit/@Model.ID_COURANT" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a>
+        <a href="~/Courants/Index" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Retour a la ligne</a>
+    </div>
+</p>

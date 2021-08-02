@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ASP.NETMVC.Models.AUTEURS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <a href="~/Auteurs/Create" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Ajouter un auteur</a>
+</p>
+<h3>Les auteurs:</h3>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <tr>
+            <th>NOM </th>
+            <th>Modifier</th>
+            <th>Details</th>
+            <th> Supprimer</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOM_AUTEUR)
+                </td>
+                <td><a href="~/Auteurs/Edit/@item.ID_AUTEUR" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a></td>
+                <td><a href="~/Auteurs/Details/@item.ID_AUTEUR" class="btn  btn-info btn-xs"><span class="glyphicon glyphicon-trash"></span>Details</a></td>
+                <td> <a href="~/Auteurs/Delete/@item.ID_AUTEUR" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Supprimer</a></td>
+
+            </tr>
+        }
+
+    </table>
+    </div>

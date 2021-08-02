@@ -1,0 +1,27 @@
+﻿@model ASP.NETMVC.Models.AUTEURS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details de l'auteur</h2>
+<hr />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOM_AUTEUR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOM_AUTEUR)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div>
+        <a href="~/Auteurs/Edit/@Model.ID_AUTEUR" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a>
+        <a href="~/Auteurs/Index" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Retour a la ligne</a>
+    </div>
+</p>

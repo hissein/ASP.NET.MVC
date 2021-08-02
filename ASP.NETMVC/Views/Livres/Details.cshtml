@@ -1,0 +1,49 @@
+﻿@model ASP.NETMVC.Models.LIVRES
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h4>Details du livre</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TITRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TITRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ANNEE_EDITION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ANNEE_EDITION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDITEUR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDITEUR)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a href="~/Livres/Edit/@Model.ID_LIVRE" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Modifier</a>
+    <a href="~/Livres/Index" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Retour a la ligne</a>
+</div>
